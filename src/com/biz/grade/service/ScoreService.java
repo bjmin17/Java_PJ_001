@@ -10,7 +10,7 @@ public interface ScoreService {
 	
 	public void scoreList();
 	
-	public void sort();
+	public void rank();
 	
 	public void makeStrNum();
 	

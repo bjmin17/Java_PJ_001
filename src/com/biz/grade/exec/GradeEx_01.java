@@ -1,20 +1,20 @@
-package com.biz.grade;
+package com.biz.grade.exec;
 
 import com.biz.grade.service.GradeService;
 import com.biz.grade.service.GradeServiceImp;
 import com.biz.grade.service.ScoreService;
-import com.biz.grade.service.ScoreServiceImpV2;
+import com.biz.grade.service.ScoreServiceImp;
 
-public class ScoreListEx_02 {
+public class GradeEx_01 {
 
 	public static void main(String[] args) {
 		
-		
-		ScoreService ss = new ScoreServiceImpV2();
 		GradeService gs = new GradeServiceImp();
 		
+		gs.input(3);
+		gs.makeStrNum();
+		gs.view();
 		
 		
-		ss.search();
 	}
 }

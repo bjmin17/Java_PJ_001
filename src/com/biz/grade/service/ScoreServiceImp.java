@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.biz.grade.model.GradeVO;
 import com.biz.grade.model.ScoreVO;
 
 public class ScoreServiceImp implements ScoreService {
 
-	Random rnd;
+	protected Random rnd;
 	protected List<ScoreVO> scoreList;
 	
 	public ScoreServiceImp() {
@@ -74,99 +73,34 @@ public class ScoreServiceImp implements ScoreService {
 		
 	}
 	@Override
-	public void sort() {
-
-		int Size = scoreList.size();
-//		for(int i = 0 ; i < Size ; i++) {
-//			
-//			ScoreVO vo = scoreList.get(i);
-//			
-//			int intRank = (i + 1);
-//			vo.setIntRank(intRank);
-//		}
+	public void rank() {
 		
-		
-		
-//		for(int i = 0 ; i < scoreVO.length ; i ++) {
-//			ScoreVO[] scoreVO = scoreList.get(i)[];
-//			for(int j = 0 ; j < scoreVO.length ; j++) {
-//				if(gradeVO[i].)
-//			}
-//		}
-
+		for(int i = 0 ; i < scoreList.size() ; i++) {
+			for(int j = i + 1; j < scoreList.size(); j++) {
 				
-		for(int i = 0 ; i < Size ; i++) {
-			//ScoreVO vo = scoreList.get(i);
-			for(int j = 0 ; j < Size ; j++) {
-				//ScoreVO vo2 = scoreList.get(j);
-				if(scoreList.get(i).getIntTotal() > scoreList.get(j).getIntTotal()) {
+				int total_i = scoreList.get(i).getIntTotal();
+				int total_j = scoreList.get(j).getIntTotal();
+				
+				// List.set(index,값)
+				// 이미 추가된 list의 index 위치의 값을
+				// 변경하고자 할 때
+				
+				// 역순정렬
+				if(total_i < total_j) {
 					
-					int Num1 = scoreList.get(i).getIntTotal();
-					int Num2 = scoreList.get(j).getIntTotal();
-					
-					int _Temp = Num1;
-					Num1 = Num2;
-					Num2 = _Temp;
-					
-					scoreList.get(i).setIntTotal(Num1);
-					scoreList.get(j).setIntTotal(Num2);
-					
-					String strNum1 = scoreList.get(i).getStrNum();
-					String strNum2 = scoreList.get(j).getStrNum();
-					
-					String str_Temp = strNum1;
-					strNum1 = strNum2;
-					strNum2 = str_Temp;
-					
-					scoreList.get(i).setStrNum(strNum1);
-					scoreList.get(j).setStrNum(strNum2);
-					
-					Num1 = scoreList.get(i).getIntKor();
-					Num2 = scoreList.get(j).getIntKor();
-					
-					_Temp = Num1;
-					Num1 = Num2;
-					Num2 = _Temp;
-					
-					scoreList.get(i).setIntKor(Num1);
-					scoreList.get(j).setIntKor(Num2);
-
-					Num1 = scoreList.get(i).getIntEng();
-					Num2 = scoreList.get(j).getIntEng();
-					
-					_Temp = Num1;
-					Num1 = Num2;
-					Num2 = _Temp;
-					
-					scoreList.get(i).setIntEng(Num1);
-					scoreList.get(j).setIntEng(Num2);
-					
-					Num1 = scoreList.get(i).getIntMath();
-					Num2 = scoreList.get(j).getIntMath();
-					
-					_Temp = Num1;
-					Num1 = Num2;
-					Num2 = _Temp;
-					
-					scoreList.get(i).setIntMath(Num1);
-					scoreList.get(j).setIntMath(Num2);
-					
-					float fNum1 = scoreList.get(i).getfAgv();
-					float fNum2 = scoreList.get(j).getfAgv();
-					
-					float f_Temp = fNum1;
-					fNum1 = fNum2;
-					fNum2 = _Temp;
-					
-					scoreList.get(i).setfAgv(fNum1);
-					scoreList.get(j).setfAgv(fNum2);
+					// scoreList의 두 위치 vo를 서로 교환
+					ScoreVO _vo = scoreList.get(i);
+					scoreList.set(i, scoreList.get(j));// 이미 만들어진 리스트의 i번째에 j번째 위치의 값으로 변경하라
+					scoreList.set(j, _vo);
 				}
 			}
 		}
-		for(int i = 0 ; i < Size ; i++) {
-			scoreList.get(i).setIntRank(i+1);
-		}
 		
+		int intRank = 1;
+		for(ScoreVO vo : scoreList) {
+			vo.setIntRank(intRank++);
+		}
+
 	}
 	@Override
 	public void makeStrNum() {
